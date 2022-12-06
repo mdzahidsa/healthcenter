@@ -8,10 +8,10 @@ namespace DataRepository.DRs.Admin
     public class UserDR
     {
 
-        #region Public Methods
-        public UserDTO GetUsers()
-        {
+        //#region Public Methods
+        //public UserDTO GetUsers()
+        //{
 
-        }
+        //}
     }
 }
