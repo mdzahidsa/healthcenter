@@ -50,7 +50,7 @@ namespace Health.DR
                 customer.LastName = rdr["LastName"].ToString();
                 customer.Address1 = rdr["Address1"].ToString();
                 customer.Address2 = rdr["Address2"].ToString();
-                customer.Address2 = rdr["City"].ToString();
+                customer.City = rdr["City"].ToString();
                 customer.Gender = rdr["Gender"].ToString();
                 customer.EmailAddress = rdr["EmailAddress"].ToString();
                 customer.PhoneNumber = rdr["PhoneNumber"].ToString();

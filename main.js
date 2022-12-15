@@ -1,17 +1,20 @@
 
-   var customerId = 0;
-   //------------inserting register function-------------------
-
-    function customerreg(){
-    var reg = {};
-    
-    reg.customerId=0;
-    if(customerId == 0){
-        reg.mode = 'registration';
-    }
-    else{
-        reg.mode = 'registration';
-    }
+   var reg={
+    customerId: 0,
+    firstName: "",
+    lastName: "",
+    gender: "",
+    address1: "",
+    address2: "",
+    phoneNumber: "",
+    emailAddress: "",
+    city: "",
+    postalCode: "",
+    isActive: 1,
+    mode: ""
+  }
+// on submit registration of customer
+function InsertCustomer(){ 
     reg.firstName = $('#firstName').val();
     reg.lastName = $('#lastName').val();
     reg.gender = $('input[name="gender"]:checked').val();
@@ -22,42 +25,121 @@
     reg.city = $('#city').val();
     reg.postalCode = $('#postalCode').val();
     reg.isActive = 1;
-    // method: 'post',
-    // data: '{data: ' + JSON.stringify(data) + '}',
-    contentType: "application/json; charset=utf-8",
+    if(reg.customerId == 0){
+        CustomerAJAX(reg,'registration')
+    }
+    else{
+        CustomerAJAX(reg,'updateregistration')
+    }
+}
+
+function LoadGrid(GridList) {
+    if (!($("#tblMain").data("kendoGrid") == null)) {
+        $("#tblMain").data("kendoGrid").destroy();
+        $("#tblMain").html("");
+    };
+    kendo.ui.progress($("#tblMain"), true);
+    $("#tblMain").kendoGrid({
+        dataSource: {
+            data: GridList,
+            pageSize: 10
+        },
+        sortable: true,
+        filterable: true,
+        groupable: false,
+        pageable: {
+            refresh: false,
+            pageSizes: true,
+            buttonCount: 3
+        },
+        columns: [
+                { field: "firstName", title: "First Name", width: 150 },
+                { field: "lastName", title: "Last Name", width: 100 },
+                { field: "phoneNumber", title: "Phone Number", width: 100 },
+                { field: "emailAddress", title: "Email Address", width: 100 },
+                // { title: "Status", width: 100, filterable: false, template: StatusTemplate },
+                { title: "Edit", width: 100, filterable: false, template: EditTemplate }
+        ],
+        dataBound: function (e) {
+            if (e.node == undefined) {
+                kendo.ui.progress($("#tblMain"), false);
+            }
+        }
+    }).data("kendoGrid");
+};
+// edit template
+function EditTemplate(e) {
+    var tmpCol = "<span onclick='edit(" + e.customerId + ")' title='Edit'>EDIT</span>";
+    return tmpCol;
+}
+//edit functin
+window.edit = function (Id) {
+    reg.customerId=Id;
+    CustomerAJAX(reg,'Edit');
+};
+
+// Ajax call
+CustomerAJAX(reg,"search");
+function CustomerAJAX(reg,mode){
+    reg.mode=mode;
     $.ajax({
         url: 'http://localhost:47995/api/Customer/Registration',
         method: 'POST',
-        // dataType: 'json',
         data: JSON.stringify(reg),
         contentType: "application/json; charset=utf-8",
         success: function (data) { 
-                alert("inserted");
+            if(mode=='Edit'){
+              var EditReg= data.dataList[0]; 
+              reg.customerId=EditReg.customerId;
+              $('#firstName').val(EditReg.firstName) ;
+              $('#lastName').val(EditReg.lastName);
+              $('#emailAddress').val(EditReg.emailAddress);
+              $('#phoneNumber').val(EditReg.phoneNumber);
+              $('#address1').val(EditReg.address1);
+              $('#address2').val(EditReg.address2);
+              $('#city').val(EditReg.city);
+              $('#postalCode').val(EditReg.postalCode);
+              if(EditReg.gender == "male"){
+                  $("#male").prop("checked", true);
+              }else{
+                  $("#female").prop("checked", true);
+              } 
+              $('#register').html("Update");  
+            return;
+            }
+            LoadGrid(data.dataList);
+            CustomerClear();
+            alert("suceesfully " + mode);
         },
         error: function (err) {
             console.log(err);
         }
     });
 }
-
-// $.ajax({
-//     url: 'DataService.asmx/InsertRegister',
-//     method: 'post',
-//     data: '{data: ' + JSON.stringify(data) + '}',
-//     contentType: "application/json; charset=utf-8",
-//     success: function () { 
-//         if (data.Id == 0) {
-//             alert("inserted");
-//             openTab(event, 'Record');
-//             loadData();
-//         } else {
-//             alert("updated");
-//             openTab(event, 'Record');
-//             loadData();
-            
-//         }
-//     },
-//     error: function (err) {
-//         alert(err);
-//     }
-// });
+function CustomerClear(){
+    $('#firstName').val("") ;
+    $('#lastName').val("");
+    $('#emailAddress').val("");
+    $('#phoneNumber').val("");
+    $('#address1').val("");
+    $('#address2').val("");
+    $('#city').val("");
+    $('#postalCode').val("")
+    $("#male").prop("checked", false);
+    $("#female").prop("checked", false);
+    reg={
+        customerId: 0,
+        firstName: "",
+        lastName: "",
+        gender: "",
+        address1: "",
+        address2: "",
+        phoneNumber: "",
+        emailAddress: "",
+        city: "",
+        postalCode: "",
+        isActive: 1,
+        mode: ""
+      }
+      $('#register').html('Register');
+}
