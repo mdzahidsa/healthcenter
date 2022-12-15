@@ -38,5 +38,15 @@ namespace Health.Controllers
             BookingDR BookingDR = new BookingDR();
             return BookingDR.GetBooking(Booking, connection);
         }
+        [HttpGet]
+        [Route("LabTest")]
+        // POST: api/Users
+        public DropDownDTO LabTest()
+        {
+            DropDownDTO DropDownDTO = new DropDownDTO();
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("HealthcenterConn").ToString());
+            DropDownDR DropDownDR = new DropDownDR();
+            return DropDownDR.GetLabTest(connection);
+        }
     }
 }
