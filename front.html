@@ -17,7 +17,6 @@
 <script src="https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js"></script>
 <!-- Font Awesome Icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
 <script src="main.js"></script>
 </head>
 <body>
@@ -90,45 +89,45 @@
         </div>
     </div>
     <div id="Booking" class="tab-pane fade">
-     
-      <div class="container">
-      <table class="table">
-      <thead>
-      <tr>
-      <th>Customer name</th>
-      <th>Booking time</th>
-      </tr>
-     <tbody>
-      <tr>
-        <td>John</td>
-        <td>10:00 AM</td>
-      </tr>
-      </thead>
-      </table>
+      <div class="form-group">
+        <label >Select Customer:</label>
+        <select onchange="State_appended()" class="form-control" id="country">
+          <option selected disabled value="select">-Select Customer-</option>
+          <option value="customer">Customer</option>
+        </select>
+        </div>
+        <div class="form-group">
+          <label >Select Test:</label>
+          <select onchange="State_appended()" class="form-control" id="country">
+            <option selected disabled value="select">-Select Test-</option>
+            <option value="Blood Test">Blood Test</option>
+          </select>
       </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" rows="5"></textarea>
+      </div>
+      <a href="#" class="btn btn-success">Button</a>
     </div>
     <div id="Admin" class="tab-pane fade">
-      <div class="container">
-      <table class="table">
-      <thead>
-      <tr>
-      <th>Customer name</th>
-      <th>Test of Type </th>
-      </tr>
-     <tbody>
-      <tr>
-        <td>John</td>
-        <td>Blood test</td>
-      </tr>
-      </thead>
-      </table>
+      <div class="container shadow min-vh-100 py-2">
+        <div class="row justify-content-center">
+        <div class="col-lg-3 col-sm-6">
+        <label for="startDate">Date</label>
+        <input id="startDate" class="form-control" type="date" />
+        </div>
+        <div class="col-lg-3 col-sm-6">
+        <div class="cs-form">
+        <label for="startDate">Time</label>
+        <input type="time" class="form-control" value="10:05 AM" />
+        </div>
+        </div>
+        </div>
+      <a href="#" class="btn btn-success">Allocate</a>
+      <div id="Lab" class="tab-pane fade">
+
+    
       </div>
     </div>
-    <div id="Lab" class="tab-pane fade">
-      
-      
-    </div>
-  </div>
-</div>
 </body>
 </html>
