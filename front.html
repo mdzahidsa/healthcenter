@@ -89,21 +89,28 @@
         </div>
     </div>
     <div id="Booking" class="tab-pane fade">
+      <div class="form-group">
+        <label >Select Customer:</label>
+        <select onchange="State_appended()" class="form-control" id="country">
+          <option selected disabled value="select">-Select Customer-</option>
+          <option value="customer">Customer</option>
+        </select>
+        </div>
+        <div class="form-group">
+          <label >Select Test:</label>
+          <select onchange="State_appended()" class="form-control" id="country">
+            <option selected disabled value="select">-Select Test-</option>
+            <option value="Blood Test">Blood Test</option>
+          </select>
+
      
       <div class="container">
-      <table class="table">
-      <thead>
-      <tr>
-      <th>Customer name</th>
-      <th>Booking time</th>
-      </tr>
-     <tbody>
-      <tr>
-        <td>John</td>
-        <td>10:00 AM</td>
-      </tr>
-      </thead>
-      </table>
+
+
+      </div>
+      <div class="form-group">
+        <label for="Description">Description</label>
+        <textarea class="form-control" id="Description" rows="5"></textarea>
       </div>
       <a href="#" class="btn btn-success">Button</a>
     </div>
