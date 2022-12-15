@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jeeva\\Desktop\\mdzahidsa\\healthcenter\\Health\\Health.csproj": {}
+    "C:\\Users\\jeeva\\Desktop\\assignments\\healthcenter\\healthcenter\\Health\\Health.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jeeva\\Desktop\\mdzahidsa\\healthcenter\\Health\\Health.csproj": {
+    "C:\\Users\\jeeva\\Desktop\\assignments\\healthcenter\\healthcenter\\Health\\Health.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jeeva\\Desktop\\mdzahidsa\\healthcenter\\Health\\Health.csproj",
+        "projectUniqueName": "C:\\Users\\jeeva\\Desktop\\assignments\\healthcenter\\healthcenter\\Health\\Health.csproj",
         "projectName": "Health",
-        "projectPath": "C:\\Users\\jeeva\\Desktop\\mdzahidsa\\healthcenter\\Health\\Health.csproj",
+        "projectPath": "C:\\Users\\jeeva\\Desktop\\assignments\\healthcenter\\healthcenter\\Health\\Health.csproj",
         "packagesPath": "C:\\Users\\jeeva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jeeva\\Desktop\\mdzahidsa\\healthcenter\\Health\\obj\\",
+        "outputPath": "C:\\Users\\jeeva\\Desktop\\assignments\\healthcenter\\healthcenter\\Health\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -45,9 +45,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Cors": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.2.3, )"
+              "version": "[6.4.0, )"
             },
             "System.Data.SqlClient": {
               "target": "Package",
