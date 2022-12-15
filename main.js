@@ -57,8 +57,8 @@ function LoadGrid(GridList) {
                 { field: "lastName", title: "Last Name", width: 100 },
                 { field: "phoneNumber", title: "Phone Number", width: 100 },
                 { field: "emailAddress", title: "Email Address", width: 100 },
-                // { title: "Status", width: 100, filterable: false, template: StatusTemplate },
-                { title: "Edit", width: 100, filterable: false, template: EditTemplate }
+                { title: "Edit", width: 100, filterable: false, template: EditTemplate },
+                { title: "Delete", width: 100, filterable: false, template: DeleteTemplate }
         ],
         dataBound: function (e) {
             if (e.node == undefined) {
@@ -69,7 +69,12 @@ function LoadGrid(GridList) {
 };
 // edit template
 function EditTemplate(e) {
-    var tmpCol = "<span onclick='edit(" + e.customerId + ")' title='Edit'>EDIT</span>";
+    var tmpCol = "<span onclick='edit(" + e.customerId + ")' title='Edit'>Edit</span>";
+    return tmpCol;
+}
+
+function DeleteTemplate (e) {
+    var tmpCol = "<span onclick='regdelete(" + e.customerId + ")' title='Deleted'>Delete</span>";
     return tmpCol;
 }
 //edit functin
@@ -77,7 +82,11 @@ window.edit = function (Id) {
     reg.customerId=Id;
     CustomerAJAX(reg,'Edit');
 };
-
+//delete functin
+window.regdelete = function (Id) {
+    reg.customerId=Id;
+    CustomerAJAX(reg,'delete');
+};
 // Ajax call
 CustomerAJAX(reg,"search");
 function CustomerAJAX(reg,mode){
@@ -109,10 +118,9 @@ function CustomerAJAX(reg,mode){
             }
             LoadGrid(data.dataList);
             CustomerClear();
-            alert("suceesfully " + mode);
         },
         error: function (err) {
-            console.log(err);
+            alert(err);
         }
     });
 }
