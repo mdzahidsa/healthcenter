@@ -66,3 +66,12 @@ DATABASE DESIGN:
 Microsoft SQL server management studio has been used to design the database system by stored procedure concept.
 It consists of 3 main tables ,namely: customer table ,booking table and lab test table.
 
+1.Customer table :
+It consist of [CustomerId],[FirstName] ,[LastName], [Gender], [Address1],[Address2], [PhoneNumber] ,[EmailAddress] ,[City]  and [PostalCode].Where CustomerID is the primary key.
+
+2. booking table :
+It consist of [BookingOrderID] ,[LabTestID], [CustomerId],[Description],[TimeSlot], [Result],[IsActive], [CreatedOn],[UpdatedOn] and [DateSlot] .Where BookingOrder is the primary key.LabTestID ,CustomerId is referred as foreign keys .
+
+3.Lab test table:
+It consist of  [LabTestID],[TestName].Where LabTestID is the primary key.
+
