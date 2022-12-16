@@ -1,5 +1,4 @@
-
-   var reg={
+    var reg={
     customerId: 0,
     firstName: "",
     lastName: "",
@@ -13,6 +12,22 @@
     isActive: 1,
     mode: ""
   }
+  var Booking ={
+    mode: "string",
+    bookingOrderID: 0,
+    labTestID: 0,
+    customerId: 0,
+    statusId: 0,
+    description: "string",
+    timeSlot: "string",
+    dateSlot: "string",
+    result: "string",
+    isActive: 0,
+    createdOn: "string",
+    updatedOn: "string"
+  }
+  var LabTestDDL = $('#LabTest');
+  var CustomerListDDL = $('#CustomerList');
 // on submit registration of customer
 function InsertCustomer(){ 
     reg.firstName = $('#firstName').val();
@@ -33,7 +48,24 @@ function InsertCustomer(){
     }
 }
 
-function LoadGrid(GridList) {
+function LoadGrid(GridList,TableName) {
+    var columns =[];
+    switch(TableName){
+        case "#tblMain":
+            columns =  [
+                { field: "firstName", title: "First Name", width: 150 },
+                { field: "lastName", title: "Last Name", width: 100 },
+                { field: "phoneNumber", title: "Phone Number", width: 100 },
+                { field: "emailAddress", title: "Email Address", width: 100 },
+                { title: "Edit", width: 100, filterable: false, template: EditTemplate },
+                { title: "Delete", width: 100, filterable: false, template: DeleteTemplate }
+            ];
+        break;
+        case 'tblbooking':
+            columns =[
+                { field: "Description", title: "Description", width: 150 },
+            ];
+    }
     if (!($("#tblMain").data("kendoGrid") == null)) {
         $("#tblMain").data("kendoGrid").destroy();
         $("#tblMain").html("");
@@ -52,14 +84,7 @@ function LoadGrid(GridList) {
             pageSizes: true,
             buttonCount: 3
         },
-        columns: [
-                { field: "firstName", title: "First Name", width: 150 },
-                { field: "lastName", title: "Last Name", width: 100 },
-                { field: "phoneNumber", title: "Phone Number", width: 100 },
-                { field: "emailAddress", title: "Email Address", width: 100 },
-                { title: "Edit", width: 100, filterable: false, template: EditTemplate },
-                { title: "Delete", width: 100, filterable: false, template: DeleteTemplate }
-        ],
+        columns: columns,
         dataBound: function (e) {
             if (e.node == undefined) {
                 kendo.ui.progress($("#tblMain"), false);
@@ -116,8 +141,39 @@ function CustomerAJAX(reg,mode){
               $('#register').html("Update");  
             return;
             }
-            LoadGrid(data.dataList);
+            LoadGrid(data.dataList,'#tblMain');
+
+            $('#CustomerList').empty();
+            $('#CustomerList').append($('<option/>', { value: -1, text: 'Select Customer' }));
+            $(data.dataList).each(function (index, item) {
+                $('#CustomerList').append($('<option/>', { value: item.customerId, text: item.firstName + "  ( " + item.emailAddress + " )" }));                           
+                });
+                $('#CustomerList').val('-1');
             CustomerClear();
+        },
+        error: function (err) {
+            alert(err);
+        }
+    });
+}
+function InsertBooking(){
+    Booking.labTestID = $('#LabTest').val();
+    Booking.customerId = $('#CustomerList').val();
+    Booking.description = $('#description').val();
+    BookingAJAX(Booking,'Book')
+}
+// Ajax call
+BookingAJAX(Booking,"search");
+function BookingAJAX(Booking,mode){
+    Booking.mode=mode;
+    $.ajax({
+        url: 'http://localhost:47995/api/Customer/Booking',
+        method: 'POST',
+        data: JSON.stringify(Booking),
+        contentType: "application/json; charset=utf-8",
+        success: function (data) { 
+            LoadGrid(data.dataList,'#tblbooking');
+            BookingClear();
         },
         error: function (err) {
             alert(err);
@@ -151,9 +207,33 @@ function CustomerClear(){
       }
       $('#register').html('Register');
 }
-
-let startDate = document.getElementById('startDate')
+GetTest()
+function GetTest(){
+    $.ajax({
+        url: 'http://localhost:47995/api/Customer/LabTest',
+        method: 'GET',
+        success: function (data) { 
+            $('#LabTest').empty();
+            $('#LabTest').append($('<option/>', { value: -1, text: 'Select Test Type' }));
+                        $(data.labTestList).each(function (index, item) {
+                            $('#LabTest').append($('<option/>', { value: item.labTestID, text: item.testName }));                           
+                        });
+                        $('#LabTest').val('-1');
+        },
+        error: function (err) {
+            alert(err);
+        }
+    });
+}
+function BookingClear(){
+    $('#LabTest').val('-1');
+    $('#CustomerList').val('-1');
+    $('#description').val("");
+}
+var startDate = document.getElementById('startDate')
+if(startDate){
 startDate.addEventListener('change',(e)=>{
-  let startDateVal = e.target.value
+    var startDateVal = e.target.value
   document.getElementById('startDateSelected').innerText = startDateVal
 })
+}

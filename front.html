@@ -29,6 +29,7 @@
   </ul>
 
   <div class="tab-content">
+    <!-- Customer Tab -->
     <div id="home" class="tab-pane fade in active">
       <div class="form-group">
             <label for="firstName">First Name:</label>
@@ -81,38 +82,35 @@
           </div>
            <button type="button" onclick='InsertCustomer();' id="register" class="btn btn-primary">Register</button>
            <button type="button" onclick="CustomerClear();" class="btn btn-primary">Clear</button>
-
            <div class="form-block-body">
             <div class="form-block-body-inner-2">
                 <div id="tblMain"></div>
             </div>
         </div>
     </div>
+    <!-- Booking Tab -->
     <div id="Booking" class="tab-pane fade">
       <div class="form-group">
         <label >Select Customer:</label>
-        <select onchange="State_appended()" class="form-control" id="country">
-          <option selected disabled value="select">-Select Customer-</option>
-          <option value="customer">Customer</option>
+        <select class="form-control" id="CustomerList">
         </select>
         </div>
         <div class="form-group">
           <label >Select Test:</label>
-          <select onchange="State_appended()" class="form-control" id="country">
-            <option selected disabled value="select">-Select Test-</option>
-            <option value="Blood Test">Blood Test</option>
+          <select class="form-control" id="LabTest">
           </select>
-
-     
-      <div class="container">
-
-
-      </div>
+        </div>
       <div class="form-group">
-        <label for="Description">Description</label>
-        <textarea class="form-control" id="Description" rows="5"></textarea>
+        <label >Description</label>
+        <textarea class="form-control" id="description" rows="5"></textarea>
       </div>
-      <a href="#" class="btn btn-success">Button</a>
+      <br/>
+      <input type="button" onclick="InsertBooking()" class="btn btn-success" value="Button" >
+      <div class="form-block-body">
+        <div class="form-block-body-inner-2">
+            <div id="tblbooking"></div>
+        </div>
+    </div>
     </div>
     <div id="Admin" class="tab-pane fade">
       <div class="container shadow min-vh-100 py-2">
@@ -123,16 +121,16 @@
         </div>
         <div class="col-lg-3 col-sm-6">
         <div class="cs-form">
-        <label for="startDate">Time</label>
+        <label>Time</label>
         <input type="time" class="form-control" value="10:05 AM" />
         </div>
         </div>
+      <br/>      
         </div>
-      <a href="#" class="btn btn-success">Allocate</a>
-      <div id="Lab" class="tab-pane fade">
-        <p></p>
-    
-      </div>
+    </div>
+    <input type="button" class="btn btn-success" value="Allocate" />
+    </div>
+    <div id="Lab" class="tab-pane fade">
     </div>
 </body>
 </html>
