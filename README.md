@@ -2,7 +2,10 @@
 This is Git commit from Jeevan and Mohamed Zahid
 # Designing the project flow
 working on with API's and stored procedures.
-
+Techonologies used for our project:
+Front End: HTML 5,Bootstrap 5,Javascript
+Back End:.netcore 6.0,WebAPI.
+Tools :Microsoft SQL server Management Studio,Swagger,Postman.
 
 Introduction
 ​The owners of medical establishments will find our project HEALTHCENTER to be a significant help in running their businesses. Our proposal, which promises to meet their need for contemporary health care services.
