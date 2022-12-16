@@ -31,9 +31,6 @@ namespace Health.DR
                 case "labtech":
                     command.SelectCommand.Parameters.AddWithValue("@Result", Booking.Result);
                     break;
-                case "search":
-                    command.SelectCommand.Parameters.AddWithValue("@BookingId", Booking.BookingOrderID);
-                    break;
             }
             command.SelectCommand.Parameters.AddWithValue("@StatusId", Booking.StatusId);
             connection.Open();
