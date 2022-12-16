@@ -62,3 +62,7 @@ The customer’s booking is retrieved, and test date slot is allotted. The admin
 4.	Lab 
 The Lab staff after the test is done, submits the result.
 
+DATABASE DESIGN:
+Microsoft SQL server management studio has been used to design the database system by stored procedure concept.
+It consists of 3 main tables ,namely: customer table ,booking table and lab test table.
+
