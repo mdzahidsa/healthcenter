@@ -38,7 +38,7 @@ Main Features
 ​Create-Created a registartion form need to fill the details like customer First name, Last name, select gender,email address,phone number,Address1,Address2,city,Postal code, after filling the details all information will be stored in database and it will dispalyed in the table. 
 ​Update -User can alter/update the data in registration form. For example if customer changes their  new mobile number, old nobile number should be deleted and must update the new mobile number.  
 ​Delete- Admin can delete the customer's data
-​View- The customer can view thir details in table, booking details and results can view in the from of table.
+​View- The customer can view their details in table, booking details and results can view in the from of table.
 ​Sorting -The data which is present in a table will be displayed in sorting format in ascending order.
 ​Filter-
 ​Validation -For every input/details that has been entering by customer that has been validated for example: some times customer will enter wrong  mobile number, in order to avoid used validation for mobile number should be between 1-9 and it must contains 9 digits of numeric. 
