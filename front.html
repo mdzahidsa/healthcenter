@@ -26,6 +26,7 @@
     <li><a data-toggle="tab" href="#Booking">Booking</a></li>
     <li><a data-toggle="tab" href="#Admin">Admin</a></li>
     <li><a data-toggle="tab" href="#Lab">Lab</a></li>
+    <li><a data-toggle="tab" href="#Result">Lab</a></li>
   </ul>
 
   <div class="tab-content">
@@ -105,13 +106,14 @@
         <textarea class="form-control" id="description" rows="5"></textarea>
       </div>
       <br/>
-      <input type="button" onclick="InsertBooking()" class="btn btn-success" value="Button" >
+      <input type="button" onclick="InsertBooking()" class="btn btn-success" value="Book" >
       <div class="form-block-body">
         <div class="form-block-body-inner-2">
             <div id="tblbooking"></div>
         </div>
     </div>
     </div>
+    <!-- Admin Tab -->
     <div id="Admin" class="tab-pane fade">
       <div class="container shadow min-vh-100 py-2">
         <div class="row justify-content-center">
@@ -124,13 +126,34 @@
         <label>Time</label>
         <input type="time" class="form-control" value="10:05 AM" />
         </div>
-        </div>
-      <br/>      
+        </div>     
         </div>
     </div>
-    <input type="button" class="btn btn-success" value="Allocate" />
+    <br/>
+    <input type="button" onclick="BookSlot()" class="btn btn-success" value="Allocate" >
+      <div class="form-block-body">
+        <div class="form-block-body-inner-2">
+            <div id="tblAdminbooking"></div>
+        </div>
     </div>
+    </div>
+    <!-- Lab Tab -->
     <div id="Lab" class="tab-pane fade">
+      <div class="form-block-body">
+        <div class="form-block-body-inner-2">
+            <div id="tblLabbooking"></div>
+        </div>
+    </div>
+    </div>
+        <!-- Result Tab -->
+    <div id="Result" class="tab-pane fade">
+        <div class="form-block-body">
+            <div class="form-block-body-inner-2">
+                <div id="tblResult"></div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
+
+

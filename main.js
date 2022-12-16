@@ -47,12 +47,12 @@ function InsertCustomer(){
         CustomerAJAX(reg,'updateregistration')
     }
 }
-
+//Kendo UI Grid Binding
 function LoadGrid(GridList,TableName) {
-    var columns =[];
+    var columnsData =[];
     switch(TableName){
         case "#tblMain":
-            columns =  [
+            columnsData =  [
                 { field: "firstName", title: "First Name", width: 150 },
                 { field: "lastName", title: "Last Name", width: 100 },
                 { field: "phoneNumber", title: "Phone Number", width: 100 },
@@ -60,18 +60,36 @@ function LoadGrid(GridList,TableName) {
                 { title: "Edit", width: 100, filterable: false, template: EditTemplate },
                 { title: "Delete", width: 100, filterable: false, template: DeleteTemplate }
             ];
-        break;
-        case 'tblbooking':
-            columns =[
-                { field: "Description", title: "Description", width: 150 },
+            break;
+        case '#tblbooking':
+            columnsData =[
+                { field: "description", title: "Description", width: 150 }
             ];
+            break;
+        case "#tblAdminbooking":
+            columnsData =[
+                { field: "description", title: "Description", width: 150 },
+                { title: "Edit", width: 100, filterable: false, template: EditAdminTemplate }
+            ];
+            break;
+        case '#tblLabbooking':
+            columnsData =[
+                { field: "description", title: "Description", width: 150 },
+                { title: "Edit", width: 100, filterable: false, template: LabTemplate }
+            ];
+            break;
+        case '#tblResult':
+            columnsData =[
+                { field: "description", title: "Description", width: 150 }
+            ];
+            break;
     }
-    if (!($("#tblMain").data("kendoGrid") == null)) {
-        $("#tblMain").data("kendoGrid").destroy();
-        $("#tblMain").html("");
+    if (!($(TableName).data("kendoGrid") == null)) {
+        $(TableName).data("kendoGrid").destroy();
+        $(TableName).html("");
     };
-    kendo.ui.progress($("#tblMain"), true);
-    $("#tblMain").kendoGrid({
+    kendo.ui.progress($(TableName), true);
+    $(TableName).kendoGrid({
         dataSource: {
             data: GridList,
             pageSize: 10
@@ -84,10 +102,10 @@ function LoadGrid(GridList,TableName) {
             pageSizes: true,
             buttonCount: 3
         },
-        columns: columns,
+        columns: columnsData,
         dataBound: function (e) {
             if (e.node == undefined) {
-                kendo.ui.progress($("#tblMain"), false);
+                kendo.ui.progress($(TableName), false);
             }
         }
     }).data("kendoGrid");
@@ -102,6 +120,14 @@ function DeleteTemplate (e) {
     var tmpCol = "<span onclick='regdelete(" + e.customerId + ")' title='Deleted'>Delete</span>";
     return tmpCol;
 }
+function EditAdminTemplate(e){
+    var tmpCol = "<span  data-bs-toggle='modal' data-bs-target='#staticBackdrop' onclick='allocate(" + e.bookingOrderID + ")' title='Edit'>Allocate</span>";
+    return tmpCol;
+}
+function LabTemplate(e){
+    var tmpCol = "<span  data-bs-toggle='modal' data-bs-target='#staticBackdrop' onclick='allocate(" + e.bookingOrderID + ")' title='Edit'>ConductTest</span>";
+    return tmpCol;
+}
 //edit functin
 window.edit = function (Id) {
     reg.customerId=Id;
@@ -112,6 +138,11 @@ window.regdelete = function (Id) {
     reg.customerId=Id;
     CustomerAJAX(reg,'delete');
 };
+// allocate function
+window.allocate=function(Id){
+
+}
+
 // Ajax call
 CustomerAJAX(reg,"search");
 function CustomerAJAX(reg,mode){
@@ -156,6 +187,7 @@ function CustomerAJAX(reg,mode){
         }
     });
 }
+// insert booking function
 function InsertBooking(){
     Booking.labTestID = $('#LabTest').val();
     Booking.customerId = $('#CustomerList').val();
@@ -173,6 +205,9 @@ function BookingAJAX(Booking,mode){
         contentType: "application/json; charset=utf-8",
         success: function (data) { 
             LoadGrid(data.dataList,'#tblbooking');
+            LoadGrid(data.dataList,'#tblAdminbooking');
+            LoadGrid(data.dataList,'#tblLabbooking');
+            LoadGrid(data.dataList,'#tblResult');
             BookingClear();
         },
         error: function (err) {
