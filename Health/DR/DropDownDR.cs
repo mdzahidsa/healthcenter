@@ -20,7 +20,26 @@ namespace Health.DR
                 _LabTest.TestName = rdr["TestName"].ToString();
                 LabTest_.Add(_LabTest);
             }
+            connection.Close();
             DropDownDTO_.LabTestList=LabTest_;
+            return DropDownDTO_;
+        }
+        public DropDownDTO GetStatus(SqlConnection connection)
+        {
+            DropDownDTO DropDownDTO_ = new DropDownDTO();
+            List<Status> Status_ = new List<Status>();
+            SqlDataAdapter command = new SqlDataAdapter("select * from Status", connection);
+            connection.Open();
+            SqlDataReader rdr = command.SelectCommand.ExecuteReader();
+            while (rdr.Read())
+            {
+                Status _Status = new Status();
+                _Status.StatusId = Convert.ToInt32(rdr["StatusId"]);
+                _Status.StatusName = rdr["StatusName"].ToString();
+                Status_.Add(_Status);
+            }
+            connection.Close();
+            DropDownDTO_.StatusList=Status_;
             return DropDownDTO_;
         }
     }
