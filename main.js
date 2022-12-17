@@ -204,10 +204,15 @@ function BookingAJAX(Booking,mode){
         data: JSON.stringify(Booking),
         contentType: "application/json; charset=utf-8",
         success: function (data) { 
-            LoadGrid(data.dataList,'#tblbooking');
-            LoadGrid(data.dataList,'#tblAdminbooking');
-            LoadGrid(data.dataList,'#tblLabbooking');
-            LoadGrid(data.dataList,'#tblResult');
+            if(mode == "Book"){
+                BookingClear();
+                BookingAJAX(Booking,"search");
+            }else{
+                LoadGrid(data.dataList,'#tblbooking');
+                LoadGrid(data.dataList,'#tblAdminbooking');
+                LoadGrid(data.dataList,'#tblLabbooking');
+                LoadGrid(data.dataList,'#tblResult');
+            }
             BookingClear();
         },
         error: function (err) {
