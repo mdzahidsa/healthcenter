@@ -50,7 +50,6 @@ namespace Health.DR
                 booking.UpdatedOn = rdr["UpdatedOn"].ToString();
                 Booking_.Add(booking);
             }
-            connection.Close();
             BookingDTO_.DataList=Booking_;
             return BookingDTO_;
         }

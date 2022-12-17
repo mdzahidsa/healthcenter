@@ -58,7 +58,6 @@ namespace Health.DR
                 customer.IsActive = Convert.ToInt32(rdr["IsActive"]);
                 Customer_.Add(customer);
             }
-            connection.Close();
             CustomerDTO_.DataList=Customer_;
             return CustomerDTO_;
         }
