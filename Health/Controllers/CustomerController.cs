@@ -48,5 +48,15 @@ namespace Health.Controllers
             DropDownDR DropDownDR = new DropDownDR();
             return DropDownDR.GetLabTest(connection);
         }
+        [HttpGet]
+        [Route("Status")]
+        // POST: api/Customer/LabTest
+        public DropDownDTO Statsus()
+        {
+            DropDownDTO DropDownDTO = new DropDownDTO();
+            SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("HealthcenterConn").ToString());
+            DropDownDR DropDownDR = new DropDownDR();
+            return DropDownDR.GetStatus(connection);
+        }
     }
 }
