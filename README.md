@@ -216,8 +216,16 @@ Created Booking table with select customer dropdown ,select test dropdown and te
 Helped in creating API and tested api using swagger post call, get call, update call, delete call.
 Helped while creating databse in microsoft Microsoft sql server management studio and also establishing connection between front end and backend.
 
-Kesoju Vineeth     :
-
+Kesoju Vineeth :
+As it is a group assignment the work distributed with the group so ihave contributed myself in html,javascript using for front end.
+i'm work on validations i have inserted First name Last name,Email address,Gender,Phone number,Address,City,Postal code and while filling 
+the detail  we miss any thing it show something is missing then we will fill every thing it will register for this we use primary keys After completing 
+Registration it will be redirect to  Booking tab  
+Booking Tab: in this i have inserted Booking id,Labtest id,customer id,Description in these we also use "if"and Return  
+Admin Tab: In these i have inserted Booking order id,Dateslot,Timeslot,Status id,in these table we have use "if" and return,else ,break for that we should enter booking id 
+and we should allocate date,time for the customer and admin will send the customer to lab then they will give there samples after some time status will be update 
+for customers
+Lab Tab: In these i have inserted Bookingorder Id, Result,status id,After giving the test samples  they may check the status of report with help of bookingorder id,then they update the results
 
 
 
