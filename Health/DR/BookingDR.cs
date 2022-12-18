@@ -23,12 +23,10 @@ namespace Health.DR
                 case "adminbook":
                     command.SelectCommand.Parameters.AddWithValue("@TimeSlot", Booking.TimeSlot);
                     command.SelectCommand.Parameters.AddWithValue("@DateSlot", Booking.DateSlot);
-                    command.SelectCommand.Parameters.AddWithValue("@BookingId", Booking.BookingOrderID);
-                    break;
-                case "adminrejected":
-                    command.SelectCommand.Parameters.AddWithValue("@BookingId", Booking.BookingOrderID);
+                    command.SelectCommand.Parameters.AddWithValue("@BookingOrderID", Booking.BookingOrderID);
                     break;
                 case "labtech":
+                    command.SelectCommand.Parameters.AddWithValue("@BookingOrderID", Booking.BookingOrderID);
                     command.SelectCommand.Parameters.AddWithValue("@Result", Booking.Result);
                     break;
             }
@@ -39,7 +37,7 @@ namespace Health.DR
             {
                 Booking booking = new Booking();
                 booking.BookingOrderID = Convert.ToInt32(rdr["BookingOrderID"]);
-                booking.LabTestID = Convert.ToInt32(rdr["BookingOrderID"]);
+                booking.LabTestID = Convert.ToInt32(rdr["LabTestID"]);
                 booking.CustomerId = Convert.ToInt32(rdr["CustomerId"]);
                 booking.StatusId = Convert.ToInt32(rdr["StatusId"]);
                 booking.Description = rdr["Description"].ToString();
