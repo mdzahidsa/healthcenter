@@ -75,3 +75,15 @@ It consist of [BookingOrderID] ,[LabTestID], [CustomerId],[Description],[TimeSlo
 3.Lab test table:
 It consist of  [LabTestID],[TestName].Where LabTestID is the primary key.
 
+
+System Requirements:
+
+Operating System :windows 10 / 11
+Hardware minimun :4GB
+Visual Studio 2022
+Visual Studio Code
+Microsoft SQL Server 2019
+Microsoft SQL Server Management Studio
+
+
+
