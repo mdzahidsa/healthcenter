@@ -7,14 +7,14 @@ Front End: HTML 5,Bootstrap 5,Javascript
 Back End:.netcore 6.0,WebAPI.
 Tools :Microsoft SQL server Management Studio,Swagger,Postman.
 
-Introduction
+                                                                             Introduction
 Modern terminology refers to developments or advancements. The topics that require the most care are now those related to speed, accuracy, dependability and efficiency.
 
 ​The owners of medical establishments will find our project HEALTHCENTER to be a significant help in running their businesses. Our proposal, which promises to meet their need for contemporary health care services.
 
 ​This project primarily focuses on the registration, appointment scheduling, and test completion results.
 
-Existing System
+                                                                                Existing System
 ​Time consuming
 ​Expensive
 ​Man power
@@ -22,19 +22,19 @@ Existing System
 ​Scanning through infinite registers
 ​Obsolete security
 
-Proposed system
+                                                                                Proposed system
 ​Our project was created to address the flaws in the existing system.
 ​The proposed system's biggest benefit is that it will require less labor and money to operate.
 ​The proposed solution will drastically cut down on the tedious manual paper processing.
 
-Technologies Used 
+                                                                            Technologies Used 
 Visual Studio 2022 / Visual studio code
 ​.NET CORE 6.0 framework ,C# .,WEBAPI.
 ​Microsoft SQL Server Management Studio
 ​Store procedures 
 ​HTML,Bootstrap–Jquery ,Ajax 
 
-Main Features
+                                                                            Main Features
 ​Create-Created a registartion form need to fill the details like customer First name, Last name, select gender,email address,phone number,Address1,Address2,city,Postal code, after filling the details all information will be stored in database and it will dispalyed in the table. 
 ​Update -User can alter/update the data in registration form. For example if customer changes their  new mobile number, old nobile number should be deleted and must update the new mobile number.  
 ​Delete- Admin can delete the customer's data
@@ -51,7 +51,7 @@ This project gives 4 main scenarios for the user:
 3. Admin 
 4. Lab
 
-MODULE DESCRIPTION
+                                                                        MODULE DESCRIPTION
 
 1.	Customer registration
 The customer's first name, last name, phone number, email address,address,city and postal code are entered into the customer registration  form.
@@ -62,7 +62,7 @@ The customer’s booking is retrieved, and test date slot is allotted. The admin
 4.	Lab 
 The Lab staff after the test is done, submits the result.
 
-DATABASE DESIGN:
+                                                                            DATABASE DESIGN:
 Microsoft SQL server management studio has been used to design the database system by stored procedure concept.
 It consists of 3 main tables ,namely: customer table ,booking table and lab test table.
 
@@ -76,7 +76,7 @@ It consist of [BookingOrderID] ,[LabTestID], [CustomerId],[Description],[TimeSlo
 It consist of  [LabTestID],[TestName].Where LabTestID is the primary key.
 
 
-System Requirements:
+                                                                        SYSTEM REQUIREMENTS:
 
 Operating System :windows 10 / 11
 Hardware minimun :4GB
@@ -85,6 +85,8 @@ Visual Studio Code
 Microsoft SQL Server 2019
 Microsoft SQL Server Management Studio
 
+
+                                                                            CREATION OF THIS PROJECT
 How we created a project visual studio project.
 Install --> Visual Studio 2022
 Create a new projet --> .Net Core Web API VERSION 
@@ -116,9 +118,7 @@ We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/
 We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js",https://demos.telerik.com/kendo-ui/grid/index taken form website.kendo links for grid binding.
 We used library references for font "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", https://fontawesome.com/ form website.
 
-
-
-
+                                                                        EXECUTION
 
 Open Visual studio 2022
 Run the project by double clicking on Health.sln which can be found in Health folder.
@@ -130,16 +130,44 @@ The user must configure the connection string which can be found in appsettings.
   },
 
 
-Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this project it is HealthCenterDB.
+Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this .NET CORE project it is HealthCenterDB.
 
-Create database name HealthCenterDB in the MS SQL Management studio then Run the script .sql file consisting of creation of tables and stored procedures .
+Create database name HealthCenterDB in the MS SQL Management studio then Run the script.sql file consisting of creation of tables and stored procedures .
 
-Run the project by pressing the START button.
+In Visual studio 2022 ,Run the project by pressing the START button.
 Open the front .html file in visual studio code 
-Run the front.html file  Right click and choose Open with live server.
-During this process, We encountered a bug called CORS error. This issue was caused due to cross platform hosting. This is issue is fixed  from the backend visual studio 2022.
+Run the front.html file , Right click and choose Open with live server.
+
+
+
+
+                                                                              TESTING
+Firstly ,Swagger was used to test APIs for GET ,POST  methods and the database connection .It also helped us to check for bugs and resolve them.Debugger was used to trace the bugs in the program.
+
+Secondly, Postman was also used to test the overall working of the environment including APIs ,AJAX Calls ,GET,POST,UPDATE and DELETE .
+During the process we faced challenges like CORS policy error,HTTP 400 Bad request, ,AJAX calls not responding as expected and we resolved them.
+We encountered a bug called CORS policy error. This issue was caused due to cross platform hosting. This is issue is fixed  from the backend  .net core (Visual studio 2022). This can be done by configuring the  Program.cs.
 
 Services.AddCors
 build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 
-This can be done at Program.cs
+                                                                         TEAM CONTRIBUTION
+                                                                         
+Makam Jeevan Sai   :
+
+
+Mohammed Zahid     :
+
+
+
+Meena Kumari       :
+
+
+
+Kesoju Vineeth     :
+
+
+
+
+
+
