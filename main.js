@@ -26,6 +26,23 @@
     createdOn: "string",
     updatedOn: "string"
   }
+var CustomerData = [];
+var BookingData = [];
+var labTestList =[];
+var statusList =[
+    {
+      statusId: 1,
+      statusName: "Send To Admin"
+    },
+    {
+      statusId: 2,
+      statusName: "Allocated Appointment"
+    },
+    {
+      statusId: 3,
+      statusName: "RESULT"
+    }
+  ]
   var LabTestDDL = $('#LabTest');
   var CustomerListDDL = $('#CustomerList');
 // on submit registration of customer
@@ -61,26 +78,24 @@ function LoadGrid(GridList,TableName) {
                 { title: "Delete", width: 100, filterable: false, template: DeleteTemplate }
             ];
             break;
+        case '#tblLabbooking':
         case '#tblbooking':
             columnsData =[
-                { field: "description", title: "Description", width: 150 }
+                { field: "CustomerInfo", title: "Customer Infomation", width: 150 },
+                { field: "labTest", title: "lab Test Name", width: 100 },
+                { field: "description", title: "Description", width: 150 },
+                { field: "dateSlot", title: "Date", width: 100 },
+                { field: "timeSlot", title: "Time", width: 100 },
+                { field: "result", title: "Result", width: 150 },
+                { field: "Status", title: "Status", width: 150 }
             ];
             break;
         case "#tblAdminbooking":
             columnsData =[
+                { field: "CustomerInfo", title: "Customer Infomation", width: 200 },
+                { field: "labTest", title: "lab Test Name", width: 100 },
                 { field: "description", title: "Description", width: 150 },
-                { title: "Edit", width: 100, filterable: false, template: EditAdminTemplate }
-            ];
-            break;
-        case '#tblLabbooking':
-            columnsData =[
-                { field: "description", title: "Description", width: 150 },
-                { title: "Edit", width: 100, filterable: false, template: LabTemplate }
-            ];
-            break;
-        case '#tblResult':
-            columnsData =[
-                { field: "description", title: "Description", width: 150 }
+                { field: "Status", title: "Status", width: 150 },
             ];
             break;
     }
@@ -97,6 +112,13 @@ function LoadGrid(GridList,TableName) {
         sortable: true,
         filterable: true,
         groupable: false,
+        reorderable: true,
+        resizable: true,
+        pageable: true,
+        noRecords: true,
+        messages: {
+            noRecords: "There is no data on current Tab"
+          },
         pageable: {
             refresh: false,
             pageSizes: true,
@@ -109,6 +131,7 @@ function LoadGrid(GridList,TableName) {
             }
         }
     }).data("kendoGrid");
+    
 };
 // edit template
 function EditTemplate(e) {
@@ -120,14 +143,7 @@ function DeleteTemplate (e) {
     var tmpCol = "<span onclick='regdelete(" + e.customerId + ")' title='Deleted'>Delete</span>";
     return tmpCol;
 }
-function EditAdminTemplate(e){
-    var tmpCol = "<span  data-bs-toggle='modal' data-bs-target='#staticBackdrop' onclick='allocate(" + e.bookingOrderID + ")' title='Edit'>Allocate</span>";
-    return tmpCol;
-}
-function LabTemplate(e){
-    var tmpCol = "<span  data-bs-toggle='modal' data-bs-target='#staticBackdrop' onclick='allocate(" + e.bookingOrderID + ")' title='Edit'>ConductTest</span>";
-    return tmpCol;
-}
+
 //edit functin
 window.edit = function (Id) {
     reg.customerId=Id;
@@ -172,6 +188,7 @@ function CustomerAJAX(reg,mode){
               $('#register').html("Update");  
             return;
             }
+            CustomerData = data.dataList;
             LoadGrid(data.dataList,'#tblMain');
 
             $('#CustomerList').empty();
@@ -188,14 +205,30 @@ function CustomerAJAX(reg,mode){
     });
 }
 // insert booking function
-function InsertBooking(){
-    Booking.labTestID = $('#LabTest').val();
-    Booking.customerId = $('#CustomerList').val();
-    Booking.description = $('#description').val();
-    BookingAJAX(Booking,'Book')
+function InsertBooking(mode){
+    switch(mode){
+        case "Book":
+            Booking.labTestID = $('#LabTest').val();
+            Booking.customerId = $('#CustomerList').val();
+            Booking.description = $('#description').val();
+            Booking.StatusId = 1;
+            break;
+        case "AdminBook":
+            Booking.bookingOrderID = $('#AdminBookingOrder').val();
+            Booking.dateSlot = $('#dateSlot').val();
+            Booking.timeSlot = $('#timeSlot').val();
+            Booking.StatusId = 2;
+            break;
+        case "LabTech":
+            Booking.bookingOrderID = $('#LabBookingOrder').val();
+            Booking.result = $('#Result').val();
+            Booking.StatusId = 3;
+            break;
+
+    }
+    BookingAJAX(Booking,mode)
 }
 // Ajax call
-BookingAJAX(Booking,"search");
 function BookingAJAX(Booking,mode){
     Booking.mode=mode;
     $.ajax({
@@ -204,22 +237,51 @@ function BookingAJAX(Booking,mode){
         data: JSON.stringify(Booking),
         contentType: "application/json; charset=utf-8",
         success: function (data) { 
-            if(mode == "Book"){
-                BookingClear();
-                BookingAJAX(Booking,"search");
-            }else{
-                LoadGrid(data.dataList,'#tblbooking');
-                LoadGrid(data.dataList,'#tblAdminbooking');
-                LoadGrid(data.dataList,'#tblLabbooking');
-                LoadGrid(data.dataList,'#tblResult');
-            }
+            // GetStatus()
             BookingClear();
+            if(mode == "search"){
+                BookingData = data.dataList;
+                BookingData.forEach((element) => { 
+                    if(CustomerData.filter(x => x.customerId === element.customerId)[0]){
+                        let CustomerObj = CustomerData.filter(x => x.customerId === element.customerId)[0]; 
+                         element.CustomerInfo = CustomerObj.firstName+ " " + CustomerObj.lastName + " ("+CustomerObj.emailAddress+")";
+                    }else {
+                        element.CustomerInfo ="Deleted  customer Cannot be Shown";
+                    }
+                    element.labTest = labTestList.filter(x => x.labTestID === element.labTestID)[0].testName;
+                    element.Status = statusList.filter(x => x.statusId === element.statusId)[0].statusName;
+                });
+                let BookingDataAdminTab = BookingData.filter(x => x.statusId === 1);
+                let BookingDataLabTab = BookingData.filter(x => x.statusId === 2);
+                // grid load functions
+                LoadGrid(BookingData,'#tblbooking');
+                LoadGrid(BookingDataAdminTab,'#tblAdminbooking');
+                LoadGrid(BookingDataLabTab,'#tblLabbooking');
+                // Admin tab dropdown binding
+                $('#AdminBookingOrder').empty();
+                $('#AdminBookingOrder').append($('<option/>', { value: -1, text: 'Select Booking Order' }));
+                $(BookingDataAdminTab).each(function (index, item) {
+                $('#AdminBookingOrder').append($('<option/>', { value: item.bookingOrderID, text: item.CustomerInfo + "  ( " + item.labTest + " )" }));                           
+                });
+                $('#AdminBookingOrder').val('-1');
+                // Lab tap drop down Binding
+                $('#LabBookingOrder').empty();
+                $('#LabBookingOrder').append($('<option/>', { value: -1, text: 'Select Booking Order' }));
+                $(BookingDataLabTab).each(function (index, item) {
+                $('#LabBookingOrder').append($('<option/>', { value: item.bookingOrderID, text: item.CustomerInfo + "  ( " + item.labTest + " )" }));                           
+                });
+                $('#LabBookingOrder').val('-1');
+
+            }else{
+                BookingAJAX(Booking,"search");
+            }
         },
         error: function (err) {
             alert(err);
         }
     });
 }
+// reset or cler data fields
 function CustomerClear(){
     $('#firstName').val("") ;
     $('#lastName').val("");
@@ -247,12 +309,14 @@ function CustomerClear(){
       }
       $('#register').html('Register');
 }
+//Lab test Dropdown getting and binding function
 GetTest()
 function GetTest(){
     $.ajax({
         url: 'http://localhost:47995/api/Customer/LabTest',
         method: 'GET',
         success: function (data) { 
+            labTestList = data.labTestList;
             $('#LabTest').empty();
             $('#LabTest').append($('<option/>', { value: -1, text: 'Select Test Type' }));
                         $(data.labTestList).each(function (index, item) {
@@ -265,15 +329,26 @@ function GetTest(){
         }
     });
 }
+// // get status from database
+// function GetStatus(){
+//     $.ajax({
+//         url: 'http://localhost:47995/api/Customer/Status',
+//         method: 'GET',
+//         success: function (data) { 
+//             statusList = data.statusList;
+//         },
+//         error: function (err) {
+//             alert(err);
+//         }
+//     });
+// }
 function BookingClear(){
     $('#LabTest').val('-1');
     $('#CustomerList').val('-1');
     $('#description').val("");
-}
-var startDate = document.getElementById('startDate')
-if(startDate){
-startDate.addEventListener('change',(e)=>{
-    var startDateVal = e.target.value
-  document.getElementById('startDateSelected').innerText = startDateVal
-})
+    $('#dateSlot').val("");
+    $('#timeSlot').val("");
+    $('#AdminBookingOrder').val('-1');
+    $('#LabBookingOrder').val('-1');
+    $('#Result').val("")
 }

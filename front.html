@@ -23,10 +23,9 @@
 <div class="container">
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#home">Customer</a></li>
-    <li><a data-toggle="tab" href="#Booking">Booking</a></li>
-    <li><a data-toggle="tab" href="#Admin">Admin</a></li>
-    <li><a data-toggle="tab" href="#Lab">Lab</a></li>
-    <li><a data-toggle="tab" href="#Result">Result</a></li>
+    <li><a data-toggle="tab" href="#Booking" onclick="BookingAJAX(Booking,'search')">Booking</a></li>
+    <li><a data-toggle="tab" href="#Admin" onclick="BookingAJAX(Booking,'search')">Admin</a></li>
+    <li><a data-toggle="tab" href="#Lab" onclick="BookingAJAX(Booking,'search')">Lab</a></li>
   </ul>
 
   <div class="tab-content">
@@ -106,7 +105,7 @@
         <textarea class="form-control" id="description" rows="5"></textarea>
       </div>
       <br/>
-      <input type="button" onclick="InsertBooking()" class="btn btn-success" value="Book" >
+      <input type="button" onclick="InsertBooking('Book')" class="btn btn-success" value="Book" >
       <div class="form-block-body">
         <div class="form-block-body-inner-2">
             <div id="tblbooking"></div>
@@ -116,21 +115,27 @@
     <!-- Admin Tab -->
     <div id="Admin" class="tab-pane fade">
       <div class="container shadow min-vh-100 py-2">
+        <div class="form-group">
+          <label >Select Booking Order:</label>
+          <select class="form-control" id="AdminBookingOrder">
+          </select>
+        </div>
+        <br/>
         <div class="row justify-content-center">
         <div class="col-lg-3 col-sm-6">
-        <label for="startDate">Date</label>
-        <input id="startDate" class="form-control" type="date" />
+        <label>Date</label>
+        <input id="dateSlot" class="form-control" type="date" />
         </div>
         <div class="col-lg-3 col-sm-6">
         <div class="cs-form">
         <label>Time</label>
-        <input type="time" class="form-control" value="10:05 AM" />
+        <input type="time" id="timeSlot" class="form-control" value="10:05 AM" />
         </div>
         </div>     
         </div>
     </div>
     <br/>
-    <input type="button" onclick="BookSlot()" class="btn btn-success" value="Allocate" >
+    <input type="button" onclick="InsertBooking('AdminBook')" class="btn btn-success" value="Allocate" >
       <div class="form-block-body">
         <div class="form-block-body-inner-2">
             <div id="tblAdminbooking"></div>
@@ -139,19 +144,24 @@
     </div>
     <!-- Lab Tab -->
     <div id="Lab" class="tab-pane fade">
+      <div class="container shadow min-vh-100 py-2">
+      <div class="form-group">
+        <label >Select Booking:</label>
+        <select class="form-control" id="LabBookingOrder">
+        </select>
+      </div>
+    <div class="form-group">
+      <label >Result</label>
+      <textarea class="form-control" id="Result" rows="5"></textarea>
+    </div>
+    </div>
+    <br/>
+    <input type="button" onclick="InsertBooking('LabTech')" class="btn btn-success" value="Book" >
       <div class="form-block-body">
         <div class="form-block-body-inner-2">
             <div id="tblLabbooking"></div>
         </div>
     </div>
-    </div>
-        <!-- Result Tab -->
-    <div id="Result" class="tab-pane fade">
-        <div class="form-block-body">
-            <div class="form-block-body-inner-2">
-                <div id="tblResult"></div>
-            </div>
-        </div>
     </div>
 </body>
 </html>
