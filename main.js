@@ -56,12 +56,32 @@ function InsertCustomer(){
     reg.address2 = $('#address2').val();
     reg.city = $('#city').val();
     reg.postalCode = $('#postalCode').val();
+    var male = document.getElementById("male");
+    var female = document.getElementById("female");
     reg.isActive = 1;
-    if(reg.customerId == 0){
-        CustomerAJAX(reg,'registration')
+    // Validation
+    var emailvaild =/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    var phoneno = /^\d{10}$/;   
+    if (reg.firstName == "") {
+        alert("*firstName should not be empty");
     }
-    else{
-        CustomerAJAX(reg,'updateregistration')
+    else if (emailvaild.test(reg.emailAddress) == false)
+    {
+        alert("*Invalid email id");
+    }
+    else if (!(reg.phoneNumber.match(phoneno))) {
+        alert("*phone Number must be 10 digit number");
+    }
+    else if (male.checked==false && female.checked==false){
+        alert("please select the gender");
+    }
+    else {
+        if(reg.customerId == 0){
+            CustomerAJAX(reg,'registration')
+        }
+        else{
+            CustomerAJAX(reg,'updateregistration')
+        }
     }
 }
 //Kendo UI Grid Binding
