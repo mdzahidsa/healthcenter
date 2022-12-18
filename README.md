@@ -160,9 +160,13 @@ Mohammed Zahid     :
 
 
 
-Meena Kumari       :
-
-
+Kallepu Meena Kumari  (10627538)     :
+Contribution:Kallepu Meena Kumari
+Designed layout for project , started creating a web page, with techonologies Html 5 and bootstrap 4 tabs ,Customer,Booking,Admin,Lab and Results,After created Customer tab created registartion form with inputs for text ,First Name ,Last Name,radio button for select gender male, female, created text input for email address,Phone number,Address1, Address2,City,Postal code,created a button register
+and clear button for register button had implemented Insert Customer() and clear button for customerclear(), register button has link that hits ajax calls thats registration form user has to enter details that details will be stored in database and used kendo for creating a tables the user details will be displayed in the table.
+Created Booking table with select customer dropdown ,select test dropdown and text area for description, button for book ,used kendo for creating table, In Admin tab created datapicker and time picker in Html and written javascript code in main.js and allocate button .In Lab table created select booking dropdown and text area for result to write the result and created button. written main.js file with functions for Insertcustomer ,Load grib for creating and fetching data for tables and ajax calls for customer,Booking function and ajax call and booking clear function.
+Helped in creating API and tested api using swagger post call, get call, update call, delete call.
+Helped while creating databse in microsoft Microsoft sql server management studio and also establishing connection between front end and backend.
 
 Kesoju Vineeth     :
 
