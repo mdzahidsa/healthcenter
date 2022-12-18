@@ -157,9 +157,28 @@ The book user can view the status of result ,appointment allocated or send to ad
 
 
                                                                 TESTING
-Firstly ,Swagger was used to test APIs for GET ,POST  methods and the database connection .It also helped us to check for bugs and resolve them.Debugger was used to trace the bugs in the program.
+                                                               
+Software testing is a crucial component in ensuring the quality of a piece of software. It stands for the reviews of the coding, design, and standards. An anomaly for software can be presented by testing.
 
-Secondly, Postman was also used to test the overall working of the environment including APIs ,AJAX Calls ,GET,POST,UPDATE and DELETE .
+The testing phase involves the testing of the developed system using test data. Preparation of the test data plays an important role in the system testing. Once the test data has been prepared, the system under study is tested using those test data.
+
+Our project  underwent testing utilizing the test data before being recommended for deployment.
+
+ 1. Unit Testing
+ 2.  Integration Testing
+ 3.  Validation Testing
+ 4. Output Testing
+
+1. Unit Testing
+The smallest component of the project is tested first in this testing process. Testing is done on all of the project's modules and sub-functions. If the modules and sub-modules perform as expected, unit testing is said to have been successful.
+
+Swagger was used to test APIs for GET ,POST  methods and the database connection .It also helped us to check for bugs and resolve them.Debugger was used to trace the bugs in the program.
+
+
+2.  Integration Testing
+In this method the combined project / program information is tested together and if any error has occurred we rectify it, So that the result can be easily obtained in a successful manner.
+
+Postman was also used to test the overall working of the environment including APIs ,AJAX Calls ,GET,POST,UPDATE and DELETE .
 During the process we faced challenges like CORS policy error,HTTP 400 Bad request, ,AJAX calls not responding as expected and we resolved them.
 To test the data flow of API debugger points were used.
 We encountered a bug called CORS policy error. This issue was caused due to cross platform hosting. This is issue is fixed  from the backend  .net core (Visual studio 2022). This can be done by configuring the  Program.cs.
@@ -167,13 +186,26 @@ We encountered a bug called CORS policy error. This issue was caused due to cros
 Services.AddCors
 build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 
+3.  Validation Testing
+The Validation part is very much essential for each and every application. Data should be validated in a good manner.
+Validation checks are performed on the following fields.
+
+a)  Text field:
+b)  Numeric Field:
+c)  Email
+
+flashes an error message. Each individual component is tested for accuracy in its functionality.
+
+ 4. Output Testing
+ Final checks before deployment if the overall  project is running successfully .
+
+
                                                          TEAM CONTRIBUTION
                                                                          
 Makam Jeevan Sai   :
 
 
 Mohammed Zahid     :
-
 
 
 Kallepu Meena Kumari  (10627538)     :
