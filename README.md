@@ -85,20 +85,6 @@ Visual Studio Code
 Microsoft SQL Server 2019
 Microsoft SQL Server Management Studio
 
-
-Open Visual studio 2022
-Run the project by double clicking on Health.sln which can be found in Health folder.
-  
-The user must configure the connection string which can be found in appsettings.json file.
-
-  "ConnectionStrings": {
-    "HealthcenterConn": "Data Source=DELL\\SQLEXPRESS;Initial Catalog=HealthCenterDB;Integrated Security=true"
-  },
-
-
-Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this project it is HealthCenterDB.
-
-Create database name HealthCenterDB in the MS SQL Management studio then Run the script .sql file consisting of creation of tables and stored procedures .
 How we created a project visual studio project.
 Install --> Visual Studio 2022
 Create a new projet --> .Net Core Web API VERSION 
@@ -129,6 +115,24 @@ We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/
 We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/js/jquery.min.js",https://demos.telerik.com/kendo-ui/grid/index taken form website.
 We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js",https://demos.telerik.com/kendo-ui/grid/index taken form website.kendo links for grid binding.
 We used library references for font "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", https://fontawesome.com/ form website.
+
+
+
+
+
+Open Visual studio 2022
+Run the project by double clicking on Health.sln which can be found in Health folder.
+  
+The user must configure the connection string which can be found in appsettings.json file.
+
+  "ConnectionStrings": {
+    "HealthcenterConn": "Data Source=DELL\\SQLEXPRESS;Initial Catalog=HealthCenterDB;Integrated Security=true"
+  },
+
+
+Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this project it is HealthCenterDB.
+
+Create database name HealthCenterDB in the MS SQL Management studio then Run the script .sql file consisting of creation of tables and stored procedures .
 
 Run the project by pressing the START button.
 Open the front .html file in visual studio code 
