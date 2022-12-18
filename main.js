@@ -225,6 +225,7 @@ function CustomerAJAX(reg,mode){
     });
 }
 // insert booking function
+// insert booking function
 function InsertBooking(mode){
     switch(mode){
         case "Book":
@@ -232,21 +233,54 @@ function InsertBooking(mode){
             Booking.customerId = $('#CustomerList').val();
             Booking.description = $('#description').val();
             Booking.StatusId = 1;
+            if( Booking.labTestID =="-1"){
+                alert("Please select Lab Test");
+                return;
+            }else if (Booking.customerId =="-1"){
+                alert("Please select Customer");
+                return;
+            }else if (Booking.description == ''){
+                alert("please enter description");
+                return;
+            }else{
+                BookingAJAX(Booking,mode)
+            }
             break;
         case "AdminBook":
             Booking.bookingOrderID = $('#AdminBookingOrder').val();
             Booking.dateSlot = $('#dateSlot').val();
             Booking.timeSlot = $('#timeSlot').val();
             Booking.StatusId = 2;
+            if( Booking.bookingOrderID =="-1"){
+                alert("Please select Lab booking Order");
+                return;
+            }else if (Booking.dateSlot ==""){
+                alert("Please select Date");
+                return;
+            }else if (Booking.timeSlot == ''){
+                alert("please select Time");
+                return;
+            }else{
+                BookingAJAX(Booking,mode)
+            }
             break;
         case "LabTech":
             Booking.bookingOrderID = $('#LabBookingOrder').val();
             Booking.result = $('#Result').val();
             Booking.StatusId = 3;
+            if( Booking.bookingOrderID =="-1"){
+                alert("Please select Lab booking Order");
+                return;
+            }else if (Booking.result ==""){
+                alert("Please select Result");
+                return;
+            }else{
+                BookingAJAX(Booking,mode)
+            }
             break;
 
     }
-    BookingAJAX(Booking,mode)
+
 }
 // Ajax call
 function BookingAJAX(Booking,mode){
