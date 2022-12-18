@@ -138,6 +138,21 @@ In Visual studio 2022 ,Run the project by pressing the START button.
 Open the front .html file in visual studio code 
 Run the front.html file , Right click and choose Open with live server.
 
+MS SQL Stored procedure :
+The database consist of 4 tables namely customer,booking,labtest and status
+Mode parameter which  various functions assigned to it like registration ,Edit ,updateregistration,delete and RegistrationActive in storedprocedure customer .
+And book,search, Adminbook and Labtech in stored procedure booking.
+
+Mode:registration - it inserts details provided in customer registration .updateregistration is used to edit customer information .delete is used to remove a customer.
+
+After registration the next tab is book .Where the booking is proceeded by entering description of the customer.Then it is submited to Admin to Allot time.
+Mode:book - it inserts details provided in booking tab i.e description ,CreatedOn date is the system generated current date which can be achived by using GETDATE() .Once the description is filled then is awaits admin to allocate appontment time slot.
+
+Mode: Admin ,updates the booking  table by allocating the date and time slot.The updateon date is updated by auto generated current system time by GETDATE().
+
+Mode:LabTest,The result is entered in result section.
+
+The book user can view the status of result ,appointment allocated or send to admin in the table present in UI.
 
 
 
