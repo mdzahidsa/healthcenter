@@ -29,10 +29,9 @@ Modern terminology refers to developments or advancements. The topics that requi
 
                                                           Technologies Used 
 Visual Studio 2022 / Visual studio code
-​.NET CORE 6.0 framework ,C# .,WEBAPI.
-​Microsoft SQL Server Management Studio
-​Store procedures 
-​HTML,Bootstrap–Jquery ,Ajax 
+​.NET CORE 6.0 framework ,C# .,>NET CORE WEBAPI.
+​Microsoft SQL Server Management Studio , MS Sql
+​HTML,Bootstrap, Jquery ,Ajax , Kendo UI
 
                                                           Main Features
 ​Create-Created a registartion form need to fill the details like customer First name, Last name, select gender,email address,phone number,Address1,Address2,city,Postal code, after filling the details all information will be stored in database and it will dispalyed in the table. 
