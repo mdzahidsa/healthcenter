@@ -99,6 +99,36 @@ The user must configure the connection string which can be found in appsettings.
 Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this project it is HealthCenterDB.
 
 Create database name HealthCenterDB in the MS SQL Management studio then Run the script .sql file consisting of creation of tables and stored procedures .
+How we created a project visual studio project.
+Install --> Visual Studio 2022
+Create a new projet --> .Net Core Web API VERSION 
+create a project name->Health centre
+selected the framework ->.net 6.0 and click on create button.
+
+controller->
+Right click and select and add controller->select API->API controller-EMPTY.
+By default packages was installed,for swagger installed package ->Swashbuckle.AspNetCore for swagger.
+click on project right click->Manage NuGet pacakges->new window will be dispalyed install System.Ddata.sqlClient
+To enable all the ports we added cors method Services.AddCors build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader(); in program.cs file.
+To establish the conection within database->
+click on appsetting .json->"ConnectionStrings": {
+    "HealthcenterConn": "Data Source=jeevan\\MSSQLSERVER01;Initial Catalog=HealthCenterDB;User ID=sa;password=123456;Integrated Security=true"
+  },
+creation of database->
+Install SQL server and Microsoft sql server mangement studio
+Sql server was used->Langugae used (MSSQL)
+created a database files 
+Testing an api->inbulit packages to install swagger,to test an api swagger was used
+Installed visual studio code for front end
+created a project health center and written html file and json file ,javascript file.
+We used library references for bootstrap href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" ,https://getbootstrap.com/ taken form website.
+We used library references for bootstrap href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css"  ,https://getbootstrap.com/ taken form website.
+We used library references for Jquery "https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"  ,https://jquery.com/ taken form website.
+We used library references for BootStrap "https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js",https://getbootstrap.com/  taken form website.
+We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/styles/kendo.default-main.min.css",https://demos.telerik.com/kendo-ui/grid/index taken form website.
+We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/js/jquery.min.js",https://demos.telerik.com/kendo-ui/grid/index taken form website.
+We used library references for Kendo "https://kendo.cdn.telerik.com/2022.3.1109/js/kendo.all.min.js",https://demos.telerik.com/kendo-ui/grid/index taken form website.kendo links for grid binding.
+We used library references for font "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", https://fontawesome.com/ form website.
 
 Run the project by pressing the START button.
 Open the front .html file in visual studio code 
