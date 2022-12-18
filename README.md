@@ -205,7 +205,7 @@ flashes an error message. Each individual component is tested for accuracy in it
 Makam Jeevan Sai   :
 
 
-Mohammed Zahid     :
+Mohammed Zahid  : My involvement into the project was researching, helped designing database, supported to debug and fix errors, and creation. Programming through SQL queries and C# on .net core project at the backend.Reached and provided ideas ,models at the initial stage of project creation.  Created DTO, DR and Controller for dropdowns to fetch data from the database and display them on dropdowns in User Interface (UI i.e. front.hml) succesfully. Used swagger and postman to test. supported team with Ajax calls ,so that the data entered from UI(user interfaqce i.e front.html) can communicate with the APIs and gets stored in database . Inputting Ideas coordinating and delivering the final project on before time.Also contributed in  writing group report and in creation of powerpoint presentation .
 
 
 Kallepu Meena Kumari  (10627538)     :
