@@ -86,4 +86,166 @@ Microsoft SQL Server 2019
 Microsoft SQL Server Management Studio
 
 
+Open Visual studio 2022
+Run the project by double clicking on Health.sln which can be found in Health folder.
+  
+The user must configure the connection string which can be found in appsettings.json file.
+
+  "ConnectionStrings": {
+    "HealthcenterConn": "Data Source=DELL\\SQLEXPRESS;Initial Catalog=HealthCenterDB;Integrated Security=true"
+  },
+
+
+Open MS SQL Server Management studio copy the server’s name and paste it at Data source. This must have  ” \\”. Initial Catalog should be your Database name. In this project it is HealthCenterDB.
+
+Create database name HealthCenterDB in the MS SQL Management studio then Run the script .sql file consisting of creation of tables and stored procedures .
+
+USE [HealthCenterDB]
+GO
+/****** Object:  Table [dbo].[BookingOrders]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BookingOrders](
+	[BookingOrderID] [int] IDENTITY(1,1) NOT NULL,
+	[LabTestID] [int] NOT NULL,
+	[CustomerId] [int] NOT NULL,
+	[Description] [varchar](max) NULL,
+	[TimeSlot] [time](0) NULL,
+	[StatusId] [int] NOT NULL,
+	[Result] [varchar](max) NULL,
+	[IsActive] [bit] NULL,
+	[CreatedOn] [datetime] NULL,
+	[UpdatedOn] [datetime] NULL,
+	[DateSlot] [date] NULL
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Customer]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customer](
+	[CustomerId] [int] IDENTITY(1,1) NOT NULL,
+	[FirstName] [nvarchar](50) NOT NULL,
+	[LastName] [nvarchar](50) NULL,
+	[Gender] [nvarchar](50) NOT NULL,
+	[Address1] [nvarchar](100) NOT NULL,
+	[Address2] [nvarchar](100) NULL,
+	[PhoneNumber] [nvarchar](22) NOT NULL,
+	[EmailAddress] [varchar](100) NOT NULL,
+	[City] [varchar](100) NULL,
+	[PostalCode] [nvarchar](100) NULL,
+	[IsActive] [bit] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[LabTest]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[LabTest](
+	[LabTestID] [int] IDENTITY(1,1) NOT NULL,
+	[TestName] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Status]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Status](
+	[StatusId] [int] IDENTITY(1,1) NOT NULL,
+	[StatusCode] [int] NOT NULL,
+	[StatusName] [int] NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  StoredProcedure [dbo].[sp_Booking]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE proc [dbo].[sp_Booking]
+(
+	@Mode VARCHAR(100),
+	@BookingOrderID int = NULL,
+	@LabTestID	int=NULL,
+	@CustomerId int=NULL,
+	@Description nvarchar(max) =NULL,
+	@TimeSlot TIME (0) =NULL,
+	@DateSlot DATE =NULL,
+	@StatusId int =NULL,
+	@Result nvarchar(max) =NULL,
+	@IsActive bit =NULL
+)
+AS
+BEGIN
+	if @Mode='Book' begin
+			insert into BookingOrders(LabTestID,CustomerId,Description, StatusId,IsActive, CreatedOn)
+				values(	@LabTestID,@CustomerId,	@Description,@StatusId,1,GETDATE())	
+	end
+	else if @Mode='Search' begin
+			Select * from BookingOrders
+	end else if @Mode='AdminBook' begin
+			Update BookingOrders set TimeSlot=@TimeSlot,DateSlot=@DateSlot,StatusId=@StatusId,UpdatedOn=GETDATE() where BookingOrderID= @BookingOrderID
+	end else if @Mode='AdminRejected' begin
+			Update BookingOrders set IsActive=0, StatusId=@StatusId where BookingOrderID= @BookingOrderID;
+	end else if @Mode='LabTech' begin
+			Update BookingOrders set Result=@Result,StatusId=@StatusId where BookingOrderID= @BookingOrderID
+	end
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_customer]    Script Date: 12/15/2022 1:04:10 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE proc [dbo].[sp_customer]
+(
+	@Mode VARCHAR(100),
+	@CustomerId int = NULL,
+	@FirstName	nvarchar(50)=NULL,
+	@LastName nvarchar(50)=NULL,
+	@Gender nvarchar(50) =NULL,
+	@Address1 nvarchar(100) =NULL,
+	@Address2 nvarchar(100) =NULL,
+	@PhoneNumber nvarchar(22) =NULL,
+	@EmailAddress varchar(100) =NULL,
+	@City varchar(100) =NULL,
+	@PostalCode nvarchar(100) =NULL,
+	@IsActive BIT=NULL
+)
+AS
+BEGIN
+	if @Mode='registration' begin
+			insert into Customer(FirstName,LastName,Gender,Address1,Address2,PhoneNumber,EmailAddress,City,PostalCode,IsActive)
+				values(	@FirstName,@LastName,@Gender,@Address1,@Address2,@PhoneNumber,@EmailAddress,@City,@PostalCode,@IsActive)
+			
+end else if @Mode='Edit' begin
+		select * from Customer where CustomerId= @CustomerId;
+end else if @Mode='search' begin
+		select * from Customer
+end else if @Mode='updateregistration' begin
+		update Customer set FirstName= @FirstName,LastName= @LastName,Gender= @Gender,Address1= @Address1,Address2=@Address2,
+				PhoneNumber=@PhoneNumber,EmailAddress=@EmailAddress,City= @City,PostalCode=@PostalCode 	
+				where CustomerId= @CustomerId
+end else if @Mode='delete' begin
+		DELETE FROM Customer WHERE CustomerId= @CustomerId;
+
+end else if @Mode='RegistrationActive' begin
+		update Customer set IsActive= @IsActive	where CustomerId= @CustomerId;
+end
+		select * from Customer
+
+END
+GO
+
+
+
+
+
 
